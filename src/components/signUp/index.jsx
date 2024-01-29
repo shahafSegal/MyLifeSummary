@@ -19,7 +19,7 @@ export default function SignUp(props){
                 repeat password:
                 <input type="password" name="repeatPass" />
             </label>
-            <button>login</button>
+            <button>Sign Up</button>
             {UserObj.error?<h3>{UserObj.error}</h3>:''}
 
         </form>

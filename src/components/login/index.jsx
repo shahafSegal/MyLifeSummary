@@ -17,7 +17,7 @@ export default function Login(props){
                 password: 
                 <input type="password" name="password" />
             </label>
-            <button>login</button>
+            <button>Login In</button>
             {UserObj.error?<h3>{UserObj.error}</h3>:''}
 
         </form>
