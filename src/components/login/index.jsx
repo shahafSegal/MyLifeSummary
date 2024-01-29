@@ -3,7 +3,6 @@ import { UserContext } from "../../contexts/UserManager";
 
 export default function Login(props){
     const {UserObj,ClearUserErr}=useContext(UserContext);
-    console.log(UserObj)
     useEffect(ClearUserErr,[])
 
    

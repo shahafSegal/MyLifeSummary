@@ -7,6 +7,7 @@ import "bootstrap/dist/js/bootstrap.bundle"
 import UserRegister from './components/pages/UserRegister'
 import { BrowserRouter, Routes,Route } from 'react-router-dom/dist'
 import NavBar from './components/navBar'
+import CreateResume from './components/pages/createResume';
 
 function App() {
  return(
@@ -14,7 +15,7 @@ function App() {
       <BrowserRouter>
         <NavBar></NavBar>
       <Routes>
-        <Route path='/' element={<h1>Home</h1>}/>
+        <Route path='/' element={<CreateResume/>}/>
         <Route path='/register' element={<UserRegister/>}/>
       </Routes>
 

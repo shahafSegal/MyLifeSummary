@@ -2,6 +2,7 @@ import Login from "../login";
 import SignUp from "../signUp";
 import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserManager";
+import { getObjHandleForm } from "../../scripts/general";
 export default function UserRegister(){
 
     const [isLoggingIn,SetIsLoggingIn]=useState(true)
@@ -10,9 +11,7 @@ export default function UserRegister(){
     const registerFunc= isLoggingIn?LoginFunc:SignUpFunc;
 
     const formSignUp=(e)=>{
-        e.preventDefault()
-        const fData=new FormData(e.target)
-        const formObj= Object.fromEntries(fData)
+        const formObj= getObjHandleForm(e)
         console.log(formObj)
         registerFunc(formObj.email,formObj.password);
     }
