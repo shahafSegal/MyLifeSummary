@@ -4,6 +4,7 @@ import { getObjHandleForm } from '../../scripts/general'
 import {addDoc, collection} from 'firebase/firestore'
 import { db } from '../../config/config'
 import { UserContext } from '../../contexts/UserManager'
+import { NavLink } from 'react-router-dom/dist'
 
 export default function CreateResume() {
     const {UserObj}=useContext(UserContext)
@@ -43,9 +44,9 @@ export default function CreateResume() {
         SetCurrResume({...CurrResume,...newResumeData})
     }
 
-
   return (
     <div>
+        <NavLink to='/register'><h1>register to save</h1></NavLink>
         {IsResumeSent?[<h1>Resume created Succesfully</h1>,<button onClick={anotherResume}>Create Another Resume</button>]:<> <form onSubmit={getName}>
            
                 <label htmlFor="docName">name for form:
@@ -54,7 +55,7 @@ export default function CreateResume() {
                 <button type="submit">{CurrResume.docName?'change':'add'} resume name</button>
             </form>
             {CurrResume.docName?<ResumeForm resumeChange={changeCurrResume}/>:<h2>Name Resume to start filling</h2>}
-            {CurrResume.work?<button onClick={addResumeDb}> send Doc</button>:null}
+            {CurrResume.work&&userId?<button onClick={addResumeDb}> send Doc</button>:null}
             </>
         }
         
