@@ -1,19 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { getObjHandleForm } from '../scripts/general'
 import '../styles/resumeForm.css'
+import WorkForm from './WorkForm'
 
 export default function ResumeForm(props) {
     // const preExistData=props.resumeData;
     // const [WorkCards,SetWorkCard]=useState(preExistData?)
     const [FirstFormObj,SetFirstFormObj]=useState({})
-    const [WorkFormObj,SetWorkForm]=useState([])
-    const [EduFormObj,SetEduForm]=useState([])
+    const [WorkFormArr,SetWorkForm]=useState([])
+    const [EduFormArr,SetEduForm]=useState([])
     const fFormRef=useRef()
 
     useEffect(()=>{
         const formObj= Object.fromEntries( new FormData( fFormRef.current))
         SetFirstFormObj(formObj)
     },[])
+
+    useEffect(()=>{if(!isObjectEmpty(FirstFormObj))sendBigForm()},[FirstFormObj,WorkFormArr,EduFormArr])
+    
+    function isObjectEmpty(obj) {
+        return Object.keys(obj).length === 0;
+    }
     
 
     const firstSubmitFunc=(e)=>{
@@ -25,12 +32,19 @@ export default function ResumeForm(props) {
     const sendBigForm=()=>{
         let newResume={}
         newResume={...newResume,...FirstFormObj}
-        newResume={...newResume,work:WorkFormObj,education:EduFormObj}
+        newResume={...newResume,work:WorkFormArr,education:EduFormArr}
         props.resumeChange(newResume)
     }
 
     const fFormChange=()=>{
         fFormRef.current.classList.add('changedForm')
+    }
+
+    const addWork=(newWork)=>{
+        SetWorkForm([...WorkFormArr,newWork])
+    }
+    const removeWork=(removeIndex)=>{
+        SetWorkForm(WorkFormArr.filter((_,index)=> index !== removeIndex))
     }
 
 
@@ -51,7 +65,7 @@ export default function ResumeForm(props) {
             </label>
             <button type="submit">submit</button>
         </form>
-        <button onClick={sendBigForm}>save new resume</button>
+        <WorkForm WorkCards={WorkFormArr} addWork={addWork} removeWork={removeWork}></WorkForm>
     </div>
   )
 }

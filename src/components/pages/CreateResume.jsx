@@ -11,11 +11,7 @@ export default function CreateResume() {
     const userId=UserObj.id;
     const[IsResumeSent,SetIsResumeSend]=useState(false);
     const[CurrResume,SetCurrResume]=useState({})
-    useEffect(()=>{console.log(CurrResume)
-        if(CurrResume.work){
-            console.log("sending now")
-        }
-    },[CurrResume])
+    useEffect(()=>{console.log(CurrResume)},[CurrResume])
 
     async function addResumeDb(){
         {
@@ -46,7 +42,7 @@ export default function CreateResume() {
 
   return (
     <div>
-        <NavLink to='/register'><h1>register to save</h1></NavLink>
+        {userId?null:<NavLink to='/register'><h1>register to save</h1></NavLink>}
         {IsResumeSent?[<h1>Resume created Succesfully</h1>,<button onClick={anotherResume}>Create Another Resume</button>]:<> <form onSubmit={getName}>
            
                 <label htmlFor="docName">name for form:
