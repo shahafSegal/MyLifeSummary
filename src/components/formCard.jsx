@@ -1,4 +1,5 @@
 import React from 'react'
+import { formatDate } from '../scripts/general';
 
 export default function FormCard(props) {
     const isWork=props.isWork;
@@ -8,8 +9,7 @@ export default function FormCard(props) {
         <div className="card">
           <h2>{isWork?'Company:':'institution:'} {place}</h2>
           <p> {isWork?`Role: ${role}`:`skill ${skill}`}</p>
-          <p>Time Start: {timeStart.toLocaleDateString()}</p>
-          <p>Time End: {timeEnd.toLocaleDateString()}</p>
+          <p>{formatDate(timeStart)}- {formatDate(timeEnd)} </p>
           <button onClick={()=>{props.remove(index)}}>remove</button>
         </div>
       );

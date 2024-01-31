@@ -5,6 +5,7 @@ import {addDoc, collection} from 'firebase/firestore'
 import { db } from '../../config/config'
 import { UserContext } from '../../contexts/UserManager'
 import { NavLink } from 'react-router-dom/dist'
+import ResumeShow from '../resumeShow'
 
 export default function CreateResume() {
     const {UserObj}=useContext(UserContext)
@@ -21,6 +22,7 @@ export default function CreateResume() {
             }
             )
             SetIsResumeSend(true)
+            SetCurrResume({})
           }catch (error) {
             console.error("Error setting resumes:", error);
           }
@@ -54,7 +56,7 @@ export default function CreateResume() {
             {CurrResume.work&&userId?<button onClick={addResumeDb}> send Doc</button>:null}
             </>
         }
-        
+        {CurrResume.work?<ResumeShow resume={CurrResume}></ResumeShow>:null}
     </div>
     
   )

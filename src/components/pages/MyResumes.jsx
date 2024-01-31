@@ -3,13 +3,30 @@ import { UserContext } from '../../contexts/UserManager'
 import { collection, query, where ,getDocs} from 'firebase/firestore'
 import { db } from '../../config/config'
 import { Dropdown } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
+import { isObjectEmpty } from '../../scripts/general'
+import ResumeShow from '../resumeShow'
 
 export default function MyResumes() {
+    const {resumeID}=useParams()
     const {UserObj}=useContext(UserContext)
     const [UserResumes,SetUserResumes]=useState([])
+    const[CurrResume,SetCurrResume]=useState({})
 
     useEffect(()=>{if(UserObj.id)fetchResumes()},[UserObj])
+    useEffect(()=>{if(resumeID)getCurrResume()},[resumeID,UserResumes])
+    useEffect(()=>{console.log(CurrResume)},[CurrResume])
+
+    function getCurrResume(){
+        const targetObject = UserResumes.find(res => res.id === resumeID);
+        if(targetObject){
+            SetCurrResume(targetObject)
+        }
+        else{
+            SetCurrResume({})
+        }
+    }
+    
 
     async function fetchResumes(){
         try {
@@ -23,8 +40,8 @@ export default function MyResumes() {
     }
     function renderDropDown(){
         if(UserObj.id){
-            const dropdownContent=UserResumes.map((val)=><Dropdown.Item><NavLink to={`/resumes/${val.id}`} className={'btn'}>{val.docName} </NavLink></Dropdown.Item>)
-            dropdownContent.push(<Dropdown.Item><NavLink to={'/'} className={'btn'}>+ new Resume </NavLink></Dropdown.Item>)
+            const dropdownContent=UserResumes.map((val)=><Dropdown.Item as={NavLink} className={'btn'} to={`/resumes/${val.id}`}>{val.docName}</Dropdown.Item>)
+            dropdownContent.push(<Dropdown.Item as={NavLink} to={'/'} className={'btn'}>+ new Resume </Dropdown.Item>)
             return(<Dropdown>
                 <Dropdown.Toggle variant="link" className="bg-dark text-decoration-none" id="dropdown-basic">Your resumes ({UserResumes.length})</Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -34,14 +51,14 @@ export default function MyResumes() {
             )
         }
         return <NavLink to={"/register"}>register to look at your resumes</NavLink>
-
     }
 
 
   return (
 
     <div>
-        {renderDropDown()}
+        {UserObj.id?renderDropDown():<NavLink to={'/register'}>register to view resumes</NavLink>}
+        {isObjectEmpty(CurrResume)?null:<ResumeShow resume={CurrResume}></ResumeShow>}
     </div>
   )
 }

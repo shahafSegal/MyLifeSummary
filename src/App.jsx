@@ -19,7 +19,7 @@ function App() {
         <Route path='/' element={<CreateResume/>}/>
         <Route path='/register' element={<UserRegister/>}/>
         <Route path='/resumes'  element={<MyResumes/>}>
-          <Route  path=':id' element={<MyResumes/>}/>
+          <Route  path=':resumeID' element={<MyResumes/>}/>
         </Route>
       </Routes>
 

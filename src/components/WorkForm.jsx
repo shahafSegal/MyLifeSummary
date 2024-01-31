@@ -5,10 +5,17 @@ import FormCard from './formCard'
 export default function WorkForm(props) {
     const handleSubmit=(e)=>{
         const formObj = getObjHandleForm(e)
-        formObj.timeStart=new Date(formObj.timeStart)
-        formObj.timeEnd=new Date(formObj.timeEnd)
-        addWork(formObj)
-        e.target.reset()
+        formObj.timeStart=new Date(formObj.timeStart).getTime()
+        formObj.timeEnd=new Date(formObj.timeEnd).getTime()
+        if(formObj.timeEnd&&formObj.timeStart)
+        {
+            addWork(formObj)
+            e.target.reset()
+        }
+        else{
+            console.log('Invalid Dates')
+        }
+       
     }
     const renderWCards=()=>{
         const rWCards=WorkCards.map((val,index)=><FormCard key={index} currCard={{...val,index:index}} remove={removeWork} isWork={true}></FormCard>)
