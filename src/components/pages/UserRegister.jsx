@@ -12,7 +12,6 @@ export default function UserRegister(){
 
     const formSignUp=(e)=>{
         const formObj= getObjHandleForm(e)
-        console.log(formObj)
         registerFunc(formObj.email,formObj.password);
     }
     const toLogDiv=[isLoggingIn?<Login userLogin={formSignUp} />:<SignUp userLogin={formSignUp}/>,<button onClick={toggleLogin}>{isLoggingIn?"don't have a user?":"already have a user?"}</button>]

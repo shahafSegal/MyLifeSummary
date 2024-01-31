@@ -19,7 +19,10 @@ function NavBar(){
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Nav.Link as={NavLink} to="/" style={activeClass}>
-                  Home
+                  Create Resume
+                </Nav.Link>
+                <Nav.Link as={NavLink} to="/resumes" style={activeClass}>
+                  MyResumes
                 </Nav.Link>
               </Nav>
               <Nav>
