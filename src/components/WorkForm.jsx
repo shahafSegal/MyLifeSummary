@@ -56,7 +56,7 @@ export default function WorkForm(props) {
                 to:
                 <input type="date" name="timeEnd"/>                
             </label>
-            <button type="submit">submit</button>
+            <button type="submit">Add Work</button>
 
         </form>
         <div>

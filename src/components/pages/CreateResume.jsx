@@ -43,7 +43,7 @@ export default function CreateResume() {
 
   return (
     <div>
-        {userId?null:<NavLink to='/register'><h1>register to save</h1></NavLink>}
+        {userId?null:<NavLink to='/register' ><h1 className={'btn btn-danger w-100'}>register to save</h1></NavLink>}
         {IsResumeSent?[<h1>Resume created Succesfully</h1>,<button onClick={anotherResume}>Create Another Resume</button>]:<> <form onSubmit={getName}>
            
                 <label htmlFor="docName">name for form:
@@ -51,7 +51,7 @@ export default function CreateResume() {
                 </label>
                 <button type="submit">{CurrResume.docName?'change':'add'} resume name</button>
             </form>
-            {CurrResume.docName?<ResumeForm preResume={{}} resumeChange={changeCurrResume}/>:<h2>Give the Resume a name</h2>}
+            {CurrResume.docName?<ResumeForm preResume={{}} resumeChange={changeCurrResume}/>:<h2 className='text-center'>Give the Resume a name:</h2>}
             {CurrResume.work&&userId?<button className='btn btn-dark w-100' onClick={addResumeDb}> save resume</button>:null}
             </>
         }

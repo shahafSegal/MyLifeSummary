@@ -56,7 +56,7 @@ export default function EduForm(props) {
                 to:
                 <input type="date" name="timeEnd"/>                
             </label>
-            <button type="submit">submit</button>
+            <button type="submit">Add Education</button>
 
         </form>
         <div>

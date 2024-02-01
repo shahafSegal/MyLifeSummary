@@ -57,7 +57,7 @@ export default function MyResumes() {
   return (
 
     <div>
-        {UserObj.id?renderDropDown():<NavLink to={'/register'}>register to view resumes</NavLink>}
+        {UserObj.id?renderDropDown():<NavLink to={'/register'} className={'btn btn-danger w-100'}>register to view resumes</NavLink>}
         {isObjectEmpty(CurrResume)?null:<ResumeShow resume={CurrResume}></ResumeShow>}
     </div>
   )

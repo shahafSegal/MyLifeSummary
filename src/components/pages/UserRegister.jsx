@@ -3,6 +3,7 @@ import SignUp from "../signUp";
 import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserManager";
 import { getObjHandleForm } from "../../scripts/general";
+import "../../styles/userReg.css"
 export default function UserRegister(){
 
     const [isLoggingIn,SetIsLoggingIn]=useState(true)
