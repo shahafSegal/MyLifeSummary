@@ -1,3 +1,4 @@
+
 export const getObjHandleForm=(e)=>{
     e.preventDefault()
     const formData=new FormData( e.target)
@@ -13,3 +14,4 @@ export const formatDate=(timestamp) =>{
     const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
     return date.toLocaleDateString(undefined, options);
   }
+

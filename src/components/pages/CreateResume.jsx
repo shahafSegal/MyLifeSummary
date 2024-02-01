@@ -22,7 +22,6 @@ export default function CreateResume() {
             }
             )
             SetIsResumeSend(true)
-            SetCurrResume({})
           }catch (error) {
             console.error("Error setting resumes:", error);
           }
@@ -52,11 +51,12 @@ export default function CreateResume() {
                 </label>
                 <button type="submit">{CurrResume.docName?'change':'add'} resume name</button>
             </form>
-            {CurrResume.docName?<ResumeForm resumeChange={changeCurrResume}/>:<h2>Name Resume to start filling</h2>}
-            {CurrResume.work&&userId?<button onClick={addResumeDb}> send Doc</button>:null}
+            {CurrResume.docName?<ResumeForm preResume={{}} resumeChange={changeCurrResume}/>:<h2>Give the Resume a name</h2>}
+            {CurrResume.work&&userId?<button className='btn btn-dark w-100' onClick={addResumeDb}> save resume</button>:null}
             </>
         }
         {CurrResume.work?<ResumeShow resume={CurrResume}></ResumeShow>:null}
+        {CurrResume.work&&userId?<button className='btn btn-dark w-100' onClick={addResumeDb}> save resume</button>:null}
     </div>
     
   )

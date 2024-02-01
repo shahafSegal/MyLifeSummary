@@ -2,14 +2,14 @@ import React, { useEffect,useState } from 'react'
 import { getObjHandleForm } from '../scripts/general'
 import FormCard from './formCard'
 
-export default function WorkForm(props) {
+export default function EduForm(props) {
     const handleSubmit=(e)=>{
         const formObj = getObjHandleForm(e)
         formObj.timeStart=new Date(formObj.timeStart).getTime()
         formObj.timeEnd=new Date(formObj.timeEnd).getTime()
         if(formObj.timeEnd&&formObj.timeStart)
         {
-            addWork(formObj)
+            addEdu(formObj)
             e.target.reset()
         }
         else{
@@ -17,21 +17,21 @@ export default function WorkForm(props) {
         }
        
     }
-    const renderWCards=()=>{
-        const rWCards=WorkCards.map((val,index)=><FormCard key={index} currCard={{...val,index:index}} remove={removeWork} isWork={true}></FormCard>)
-        console.log(rWCards)
-        setRenderedWorkCards(rWCards)
+    const renderECards=()=>{
+        const rECards=EduCards.map((val,index)=><FormCard key={index} currCard={{...val,index:index}} remove={removeEdu}></FormCard>)
+        console.log(rECards)
+        setRenderedEduCards(rECards)
     }
 
 
-    const WorkCards=props.WorkCards
-    const addWork=props.addWork
-    const removeWork=props.removeWork
-    const [renderedWorkCards, setRenderedWorkCards] = useState([]);
+    const EduCards=props.EduCards
+    const addEdu=props.addEdu
+    const removeEdu=props.removeEdu
+    const [renderedEduCards, setRenderedEduCards] = useState([]);
 
     
 
-    useEffect(renderWCards,[WorkCards])
+    useEffect(renderECards,[EduCards])
     
 
 
@@ -43,9 +43,9 @@ export default function WorkForm(props) {
                 company:
                 <input type="text" name="place"/>
             </label>
-            <label htmlFor="role">
-                role:
-                <input type="text" name="role"/>
+            <label htmlFor="skill">
+                skill:
+                <input type="text" name="skill"/>
                 
             </label>
             <label htmlFor="timeStart">
@@ -60,7 +60,7 @@ export default function WorkForm(props) {
 
         </form>
         <div>
-            {renderedWorkCards}
+            {renderedEduCards}
         </div>
     </>
     )

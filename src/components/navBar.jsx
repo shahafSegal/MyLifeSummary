@@ -12,7 +12,7 @@ function NavBar(){
       })
 
     return(
-          <Navbar bg="primary" expand="lg" data-bs-theme="dark" className="justify-content-end">
+          <Navbar id='navbar' bg="primary" expand="lg" data-bs-theme="dark" className="justify-content-end">
           <Container>
             <Navbar.Brand>MyLifeSummary</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />

@@ -1,0 +1,10 @@
+#root{
+    background-color: #030532;
+    color: aliceblue;
+    min-height: 100vh;
+}
+#navbar{
+    position: sticky;
+    top: 0px;
+    z-index: 1000;
+}

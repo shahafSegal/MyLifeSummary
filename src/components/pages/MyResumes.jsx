@@ -40,11 +40,11 @@ export default function MyResumes() {
     }
     function renderDropDown(){
         if(UserObj.id){
-            const dropdownContent=UserResumes.map((val)=><Dropdown.Item as={NavLink} className={'btn'} to={`/resumes/${val.id}`}>{val.docName}</Dropdown.Item>)
-            dropdownContent.push(<Dropdown.Item as={NavLink} to={'/'} className={'btn'}>+ new Resume </Dropdown.Item>)
-            return(<Dropdown>
-                <Dropdown.Toggle variant="link" className="bg-dark text-decoration-none" id="dropdown-basic">Your resumes ({UserResumes.length})</Dropdown.Toggle>
-                <Dropdown.Menu>
+            const dropdownContent=UserResumes.map((val)=><Dropdown.Item as={NavLink} className={'w-100 text-center'} to={`/resumes/${val.id}`}>{val.docName}</Dropdown.Item>)
+            dropdownContent.push(<Dropdown.Item as={NavLink} to={'/'} className={'w-100 text-center'}>+ new Resume </Dropdown.Item>)
+            return(<Dropdown id='pageDropDown'>
+                <Dropdown.Toggle variant="link" className="bg-dark text-decoration-none w-100" id="dropdown-basic">Your resumes ({UserResumes.length})</Dropdown.Toggle>
+                <Dropdown.Menu className='w-100 dropdown-menu-dark' >
                     {dropdownContent}
                 </Dropdown.Menu>
             </Dropdown>

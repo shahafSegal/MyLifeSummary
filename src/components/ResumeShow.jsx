@@ -1,13 +1,38 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { formatDate } from '../scripts/general';
+import '../styles/resumePage.css'
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 export default function ResumeShow(props) {
     const resume=props.resume
     console.log(resume)
+    const pdfRef=useRef()
+
+    const downloadPDF = () =>{
+      const input = pdfRef.current;
+      html2canvas(input).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4', true);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+        const imgWidth = canvas.width;
+        const imgHeight = canvas.height;
+        const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+        const imgX = (pdfWidth - imgWidth * ratio);
+        const imgY = 0;
+        pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+        pdf.save('resume.pdf');
+      });
+    };
+
+
 
 
     return (
-        <article className='bg-dark text-primary'>
+      <div className='d-flex flex-column align-items-center'>
+        <button onClick={downloadPDF}>download as pdf</button>
+        <article ref={pdfRef} className='page'>
           <header>
             <h2>fullname: {resume.fullname}</h2>
             <p>About: {resume.about}</p>
@@ -35,10 +60,12 @@ export default function ResumeShow(props) {
               <div key={index}>
                 <h3>{edu.skill}</h3>
                 <p>{edu.place}</p>
-                <p>{formatDate(experience.timeStart)} - {formatDate(experience.timeEnd)}</p>
+                <p>{formatDate(edu.timeStart)} - {formatDate(edu.timeEnd)}</p>
               </div>
             ))}
           </section>}
         </article>
+        <button onClick={downloadPDF}>download as pdf</button>
+        </div>
       );
 }
