@@ -30,16 +30,16 @@ export default function ResumeShow(props) {
 
 
     return (
-      <div className='d-flex flex-column align-items-center'>
-        <button onClick={downloadPDF}>download as pdf</button>
+      <div className='d-flex flex-column align-items-center py-2'>
+        <button onClick={downloadPDF} className='btn btn-warning w-50'>download as pdf</button>
         <article ref={pdfRef} className='page'>
           <header>
-            <h2>fullname: {resume.fullname}</h2>
+            <h2>{resume.fullname}</h2>
             <p>About: {resume.about}</p>
             <p>Phone: {resume.phone}</p>
             <p>Email: {resume.email}</p>
           </header>
-    
+          <div className='resumeRight'>
           {resume.work.length==0?null:<section>
             <h2>Work Experience</h2>
             <ul>
@@ -64,8 +64,9 @@ export default function ResumeShow(props) {
               </div>
             ))}
           </section>}
+          </div>
         </article>
-        <button onClick={downloadPDF}>download as pdf</button>
+        <button onClick={downloadPDF} className='btn btn-warning w-50'>download as pdf</button>
         </div>
       );
 }
