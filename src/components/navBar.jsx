@@ -144,7 +144,7 @@ export default function NavBar(props) {
               }}
             >
               <MenuItem>Profile</MenuItem>
-              <MenuItem onClick={logOut} sx={{display:"flex",columnGap:"1vw"}} ><p>Log Out</p> <FontAwesomeIcon icon={faRightFromBracket} />  </MenuItem>
+              <MenuItem onClick={logOut} sx={{display:"flex",columnGap:"1vw",alignItems:'center'}} ><span>Log Out</span> <FontAwesomeIcon icon={faRightFromBracket} />  </MenuItem>
             </Menu>
 
 
