@@ -8,3 +8,28 @@
     top: 0px;
     z-index: 1000;
 }
+
+
+#App[data-theme="light"]{
+    --primary-bgColor:#242428;
+    --secondary-bgColor:#2f2f33;
+    --highlight-bgColor:#434346;
+    --color-scheme:light;
+}
+
+#App[data-theme="dark"] {
+    --primary-bgColor:#242428;
+    --secondary-bgColor:#2f2f33;
+    --highlight-bgColor:#434346;
+    --highlight2-bgColor:#67676a;
+    --primary-textColor:#ffdd95;
+    --secondary-textColor:#f5ffd6;
+    --highlight-textColor:#ffc547;
+    --color-scheme:dark;
+}
+
+#App{
+    background-color: var(--primary-bgColor);
+    color: var( --primary-textColor) ;
+    color-scheme: var(--color-scheme);
+}
