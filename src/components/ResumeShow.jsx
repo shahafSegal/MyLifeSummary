@@ -3,6 +3,7 @@ import { formatDate } from '../scripts/general';
 import '../styles/resumePage.css'
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { Box } from '@mui/material';
 
 export default function ResumeShow(props) {
     const resume=props.resume
@@ -30,8 +31,9 @@ export default function ResumeShow(props) {
 
 
     return (
-      <div className='d-flex flex-column align-items-center py-2'>
+      <Box sx={{display:'flex',flexDirection:'column',alignItems:'center',maxWidth:'100%'}}>
         <button onClick={downloadPDF} className='btn btn-warning w-50'>download as pdf</button>
+        <Box sx={{width:'100%',overflowX:'auto' }}>
         <article ref={pdfRef} className='page'>
           <header>
             <h2>{resume.fullname}</h2>
@@ -66,7 +68,8 @@ export default function ResumeShow(props) {
           </section>}
           </div>
         </article>
+        </Box>
         <button onClick={downloadPDF} className='btn btn-warning w-50'>download as pdf</button>
-        </div>
+        </Box>
       );
 }

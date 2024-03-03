@@ -2,11 +2,11 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import "bootstrap/dist/js/bootstrap.bundle"
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle";
 import UserRegister from './components/pages/UserRegister'
 import { BrowserRouter, Routes,Route } from 'react-router-dom/dist'
-import CreateResume from './components/pages/createResume';
+import CreateResume from './components/pages/CreateResume';
 import MyResumes from './components/pages/MyResumes';
 import { ThemeProvider, createTheme } from '@mui/material'
 import NavBar from './components/navBar'

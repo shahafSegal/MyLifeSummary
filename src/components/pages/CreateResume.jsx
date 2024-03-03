@@ -5,7 +5,8 @@ import {addDoc, collection} from 'firebase/firestore'
 import { db } from '../../config/config'
 import { UserContext } from '../../contexts/UserManager'
 import { NavLink } from 'react-router-dom/dist'
-import ResumeShow from '../resumeShow'
+import ResumeShow from '../ResumeShow'
+
 
 export default function CreateResume() {
     const {UserObj}=useContext(UserContext)
@@ -56,7 +57,7 @@ export default function CreateResume() {
             </>
         }
         {CurrResume.work?<ResumeShow resume={CurrResume}></ResumeShow>:null}
-        {CurrResume.work&&userId?<button className='btn btn-dark w-100' onClick={addResumeDb}> save resume</button>:null}
+        {CurrResume.work&&userId?<button className={`btn w-100 btn-dark`} onClick={addResumeDb}> save resume</button>:null}
     </div>
     
   )

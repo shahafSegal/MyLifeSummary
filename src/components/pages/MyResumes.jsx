@@ -2,14 +2,15 @@ import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../contexts/UserManager'
 import { collection, query, where ,getDocs} from 'firebase/firestore'
 import { db } from '../../config/config'
-import { Dropdown } from 'react-bootstrap'
+// import { Dropdown } from 'react-bootstrap'
 import { NavLink, useParams } from 'react-router-dom'
 import { isObjectEmpty } from '../../scripts/general'
-import ResumeShow from '../resumeShow'
+import ResumeShow from '../ResumeShow'
+import DropDownResume from '../DropDownResume'
 
 export default function MyResumes() {
     const {resumeID}=useParams()
-    const {UserObj}=useContext(UserContext)
+    const {UserObj,UserID}=useContext(UserContext)
     const [UserResumes,SetUserResumes]=useState([])
     const[CurrResume,SetCurrResume]=useState({})
 
@@ -39,16 +40,8 @@ export default function MyResumes() {
           }
     }
     function renderDropDown(){
-        if(UserObj.id){
-            const dropdownContent=UserResumes.map((val)=><Dropdown.Item as={NavLink} className={'w-100 text-center'} to={`/resumes/${val.id}`}>{val.docName}</Dropdown.Item>)
-            dropdownContent.push(<Dropdown.Item as={NavLink} to={'/'} className={'w-100 text-center'}>+ new Resume </Dropdown.Item>)
-            return(<Dropdown id='pageDropDown'>
-                <Dropdown.Toggle variant="link" className="bg-dark text-decoration-none w-100" id="dropdown-basic">Your resumes ({UserResumes.length})</Dropdown.Toggle>
-                <Dropdown.Menu className='w-100 dropdown-menu-dark' >
-                    {dropdownContent}
-                </Dropdown.Menu>
-            </Dropdown>
-            )
+        if(UserID){
+            return (<DropDownResume UserResumes={UserResumes}/>)         
         }
         return <NavLink to={"/register"}>register to look at your resumes</NavLink>
     }

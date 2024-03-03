@@ -2,6 +2,7 @@
     background-color: #030532;
     color: aliceblue;
     min-height: 100vh;
+    width: 100%;
 }
 #navbar{
     position: sticky;

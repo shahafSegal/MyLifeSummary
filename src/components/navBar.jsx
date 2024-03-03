@@ -8,11 +8,14 @@ import {
   MenuItem,
   Button,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+// import MenuIcon from "@mui/icons-material/Menu";
+// import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserManager";
-import { Brightness4 } from "@mui/icons-material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faMoon, faRightFromBracket, faSun, faUserCircle } from '@fortawesome/free-solid-svg-icons'
+
+
 
 export default function NavBar(props) {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -45,11 +48,14 @@ export default function NavBar(props) {
       handleMenuClose();
     };
   
-    const { UserObj,UserID} = useContext(UserContext);
+    const { UserObj,UserID ,logOut} = useContext(UserContext);
+    console.log(UserID)
+
   
 
     const menuItems=[
         <MenuItem onClick={() => handleNavigate("/")} key="home">Home</MenuItem>,
+        <MenuItem onClick={() => handleNavigate("/resumes")} key='resumes'>My Resumes</MenuItem>,
         
     ]
 
@@ -68,7 +74,7 @@ export default function NavBar(props) {
               sx={{ mr: 2, display: { xs: "block", sm: "none" } }}
               onClick={handleAnchorMenuOpen}
             >
-              <MenuIcon />
+              <FontAwesomeIcon  icon={faBars} />
   
             </IconButton>
             <Menu
@@ -99,7 +105,7 @@ export default function NavBar(props) {
   
   
               <IconButton onClick={props.toggleDark} color="inherit">
-                <Brightness4 />
+                <FontAwesomeIcon icon={props.isDark?faSun:faMoon}/>
               </IconButton>
               <Box sx={{display:"flex"}} onClick={UserID?handleUserMenuOpen:() => handleNavigate("/register")}>
                 {UserID?<p>{UserObj.fullname}</p>:<Button
@@ -117,8 +123,8 @@ export default function NavBar(props) {
                   color="inherit"
                   
                 >
-                  <AccountCircle />
                   
+                  <FontAwesomeIcon icon={faUserCircle}/>
 
                 </IconButton>
               </Box>
@@ -138,6 +144,7 @@ export default function NavBar(props) {
               }}
             >
               <MenuItem>Profile</MenuItem>
+              <MenuItem onClick={logOut} sx={{display:"flex",columnGap:"1vw"}} ><p>Log Out</p> <FontAwesomeIcon icon={faRightFromBracket} />  </MenuItem>
             </Menu>
 
 
