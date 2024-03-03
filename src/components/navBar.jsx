@@ -1,40 +1,149 @@
-import { Nav,Container, Navbar, Button } from "react-bootstrap";
-import { NavLink} from "react-router-dom"
-import UserDropDown from "./UserDropDown";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Menu,
+  MenuItem,
+  Button,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserManager";
-function NavBar(){
+import { Brightness4 } from "@mui/icons-material";
 
-    const {UserObj}=useContext(UserContext)
-    const activeClass=({ isActive }) => ({
-        color: isActive ? '#C0C0C0' : '#545e6f',
-        background: isActive ? '#7600dc' : '#C0C0C0',
-      })
+export default function NavBar(props) {
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [userAnchor,setUserAnchor]=useState(null)
+    const navigate = useNavigate();
+  
+    const handleAnchorMenuOpen = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleUserMenuOpen=(event)=>{
+      console.log("user open")
+      setUserAnchor(event.currentTarget);
+    }
+  
+    const handleMenuClose = () => {
+      handleAnchorMenuClose()
+      handleUserMenuClose()
+    };
+    const handleAnchorMenuClose = () => {
+      
+      setAnchorEl(null);
+    };
+    const handleUserMenuClose = () => {
+      setUserAnchor(null);
+    };
+    
+  
+    const handleNavigate = (path) => {
+      navigate(path);
+      handleMenuClose();
+    };
+  
+    const { UserObj,UserID} = useContext(UserContext);
+  
 
-    return(
-          <Navbar id='navbar' bg="primary" expand="lg" data-bs-theme="dark" className="justify-content-end">
-          <Container>
-            <Navbar.Brand>MyLifeSummary</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
-                <Nav.Link as={NavLink} to="/" style={activeClass}>
-                  Create Resume
-                </Nav.Link>
-                <Nav.Link as={NavLink} to="/resumes" style={activeClass}>
-                  MyResumes
-                </Nav.Link>
-              </Nav>
-              <Nav>
-                {UserObj.id ? <UserDropDown/>: (
-                  <Nav.Link as={NavLink} style={activeClass} to="/register">
-                    Register
-                  </Nav.Link>)
+    const menuItems=[
+        <MenuItem onClick={() => handleNavigate("/")} key="home">Home</MenuItem>,
+        
+    ]
+
+
+
+
+    return (
+      <Box sx={{ flexGrow: 1 ,position:'sticky',top:0 ,zIndex:1000}}>
+        <AppBar pall color="primary" position="static">
+          <Toolbar>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              sx={{ mr: 2, display: { xs: "block", sm: "none" } }}
+              onClick={handleAnchorMenuOpen}
+            >
+              <MenuIcon />
+  
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleAnchorMenuClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+            >
+             {menuItems}
+            </Menu>
+            <Box sx={{ display: { xs: "none", sm: "flex" } }}>
+              {menuItems}
+            </Box>
+  
+  
+            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ display: 'flex' }}>
+  
+  
+  
+              <IconButton onClick={props.toggleDark} color="inherit">
+                <Brightness4 />
+              </IconButton>
+              <Box sx={{display:"flex"}} onClick={UserID?handleUserMenuOpen:() => handleNavigate("/register")}>
+                {UserID?<p>{UserObj.fullname}</p>:<Button
+                  variant="contained"
+                  color="success"
+                  onClick={() => handleNavigate("/register")}
+                  >
+                    {"Login"}
+                  </Button>
                 }
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
-    )
-}
-export default NavBar;
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  color="inherit"
+                  
+                >
+                  <AccountCircle />
+                  
+
+                </IconButton>
+              </Box>
+              <Menu
+              id="menu-appbar"
+              anchorEl={userAnchor}
+              keepMounted
+              open={Boolean(userAnchor)}
+              onClose={handleUserMenuClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+            >
+              <MenuItem>Profile</MenuItem>
+            </Menu>
+
+
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </Box>
+    );
+  }

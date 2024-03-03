@@ -68,7 +68,7 @@ export default function UserManager({children}) {
     },[])
   
     return (
-        <UserContext.Provider value={{UserObj,LoginFunc,SignUpFunc,logOut,ClearUserErr}}>
+        <UserContext.Provider value={{UserObj,UserID:UserObj.id,LoginFunc,SignUpFunc,logOut,ClearUserErr}}>
             {children}
         </UserContext.Provider>
     )
